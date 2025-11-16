@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hibs Hive - Luxurious Dresses</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        // Tailwind configuration
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'gold': '#D4AF37', // A classic, strong gold
+                        'soft-gold': '#E6C88C', // Lighter, champagne gold
+                        'deep-black': '#0a0a0a', // Rich black for backgrounds
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Base styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* This complex animated gradient is the key to the "luxurious" feel and
+               provides a background for the "liquid glass" to blur. */
+            background: linear-gradient(115deg, 
+                #0a0a0a 10%, 
+                #2b210a 30%, 
+                #c39f2f 50%, 
+                #2b210a 70%, 
+                #0a0a0a 90%
+            );
+            background-size: 200% 200%;
+            animation: gradient-flow 18s ease infinite;
+            color: #FDFDFD;
+            overflow-x: hidden; /* Prevents horizontal scroll from gradient */
+        }
+
+        /* Gradient animation */
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* The "Liquid Glass" (Glassmorphism) class */
+        .glass-ui {
+            background: rgba(10, 10, 10, 0.25); /* Dark, translucent base */
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%); /* For Safari */
+            border: 1px solid rgba(212, 175, 55, 0.2); /* Faint golden border */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+        }
+
+        /* Gold gradient text */
+        .text-gradient-gold {
+            background: linear-gradient(to right, #E6C88C, #D4AF37, #E6C88C);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-deep-black min-h-screen">
+
+    <div class="relative z-10 p-4 md:p-8 max-w-7xl mx-auto">
+        
+        <!-- Header & Navigation -->
+        <header class="glass-ui rounded-full w-full max-w-4xl mx-auto p-4 px-8 sticky top-4 z-50">
+            <nav class="flex justify-between items-center">
+                <a href="#" class="nav-link text-2xl font-bold tracking-wider text-gradient-gold" data-page="home">HIBS HIVE</a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="nav-link text-gray-200 hover:text-gold transition-colors duration-300" data-page="home">Home</a>
+                    <a href="#" class="nav-link text-gray-200 hover:text-gold transition-colors duration-300" data-page="collections">Collections</a>
+                    <a href="#" class="nav-link text-gray-200 hover:text-gold transition-colors duration-300" data-page="about">About</a>
+                    <a href="#" class="nav-link text-gray-200 hover:text-gold transition-colors duration-300" data-page="contact">Contact</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" aria-label="Open menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Mobile Menu (Fullscreen Overlay) -->
+        <div id="mobile-menu" 
+             class="hidden fixed inset-0 z-40 h-screen w-screen glass-ui"
+             style="backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); background: rgba(0,0,0,0.5);">
+            
+            <!-- Close Button -->
+            <button id="mobile-menu-close-button" class="absolute top-8 right-8" aria-label="Close menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            
+            <!-- Menu Links -->
+            <nav class="flex flex-col items-center justify-center h-full space-y-10">
+                <a href="#" class="nav-link text-4xl font-bold text-gray-200 hover:text-gold transition-colors duration-300" data-page="home">Home</a>
+                <a href="#" class="nav-link text-4xl font-bold text-gray-200 hover:text-gold transition-colors duration-300" data-page="collections">Collections</a>
+                <a href="#" class="nav-link text-4xl font-bold text-gray-200 hover:text-gold transition-colors duration-300" data-page="about">About</a>
+                <a href="#" class="nav-link text-4xl font-bold text-gray-200 hover:text-gold transition-colors duration-300" data-page="contact">Contact</a>
+            </nav>
+        </div>
+
+        <!-- Main Content Area -->
+        <!-- Each 'page' is a <main> tag. We will show/hide these. -->
+        
+        <!-- === HOME PAGE === -->
+        <main id="page-home" class="page-content">
+            
+            <!-- Hero Section -->
+            <section class="mt-20 md:mt-32 text-center flex flex-col items-center">
+                <div class="glass-ui rounded-3xl p-8 md:p-16 max-w-4xl mx-auto">
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight">
+                        Elegance is
+                        <span class="text-gradient-gold block mt-2 md:mt-4">Woven In</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mt-6">
+                        Discover timeless luxury. Our exclusive collections are crafted for the woman who defines her own brilliance.
+                    </p>
+                    <a href="#" class="nav-link inline-block mt-10 px-10 py-4 rounded-full bg-gold text-deep-black text-lg font-bold
+                                   hover:bg-soft-gold transition-all duration-300 
+                                   transform hover:scale-105 shadow-lg shadow-gold/20"
+                       data-page="collections">
+                        Explore The New Collection
+                    </a>
+                </div>
+            </section>
+        </main>
+        
+        <!-- === COLLECTIONS PAGE === -->
+        <main id="page-collections" class="page-content hidden">
+            <!-- Featured Collection -->
+            <section class="mt-24 md:mt-32">
+                <h2 class="text-4xl font-bold text-center mb-12">
+                    The <span class="text-gradient-gold">Golden Hour</span> Collection
+                </h2>
+                
+                <!-- Filter and Sort Controls -->
+                <div class="glass-ui rounded-xl p-4 mb-8 max-w-2xl mx-auto flex flex-col md:flex-row justify-center items-center gap-4">
+                    <div class="w-full md:w-auto">
+                        <label for="category-filter" class="block text-sm font-medium text-gray-300 mb-1 ml-2">Category</label>
+                        <select id="category-filter" class="w-full md:w-48 bg-gray-900/50 border border-gold/30 text-white rounded-lg p-2 focus:ring-gold focus:border-gold">
+                            <option value="all">All Categories</option>
+                            <option value="dresses">Dresses</option>
+                            <option value="jumpsuits">Jumpsuits</option>
+                        </select>
+                    </div>
+                    <div class="w-full md:w-auto">
+                        <label for="sort-filter" class="block text-sm font-medium text-gray-300 mb-1 ml-2">Sort by Price</label>
+                        <select id="sort-filter" class="w-full md:w-48 bg-gray-900/50 border border-gold/30 text-white rounded-lg p-2 focus:ring-gold focus:border-gold">
+                            <option value="default">Default</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Product Card 1 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="1250">
+                        <img src="https://placehold.co/600x800/201a05/E6C88C?text=Ophelia+Gown" 
+                             alt="The Ophelia Gown" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/201a05/E6C88C?text=Ophelia+Gown'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Ophelia Gown</h3>
+                            <p class="text-gray-300 mt-2">Silk charmeuse with hand-beaded pearl detailing. A timeless silhouette.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,250</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 2 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="980">
+                        <img src="https://placehold.co/600x800/2b210a/E6C88C?text=Seraphina+Dress" 
+                             alt="The Seraphina Dress" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/2b210a/E6C88C?text=Seraphina+Dress'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Seraphina Dress</h3>
+                            <p class="text-gray-300 mt-2">Liquid gold lamé, designed to capture the light and flow with every step.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$980</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 3 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="jumpsuits" data-price="1100">
+                        <img src="https://placehold.co/600x800/3c2f0f/E6C88C?text=Elara+Jumpsuit" 
+                             alt="The Elara Jumpsuit" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/3c2f0f/E6C88C?text=Elara+Jumpsuit'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Elara Jumpsuit</h3>
+                            <p class="text-gray-300 mt-2">A modern statement. Tailored crepe with a dramatic, floor-sweeping cape.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,100</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 4 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="jumpsuits" data-price="850">
+                        <img src="https://placehold.co/600x800/2a1f0a/E6C88C?text=Nyx+Jumpsuit" 
+                             alt="The Nyx Jumpsuit" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/2a1f0a/E6C88C?text=Nyx+Jumpsuit'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Nyx Jumpsuit</h3>
+                            <p class="text-gray-300 mt-2">Velvet-finish with a structured bodice. Perfect for evening wear.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$850</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 5 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="1400">
+                        <img src="https://placehold.co/600x800/1a1a0a/E6C88C?text=Aurora+Dress" 
+                             alt="The Aurora Dress" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/1a1a0a/E6C88C?text=Aurora+Dress'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Aurora Dress</h3>
+                            <p class="text-gray-300 mt-2">Full-length satin with a daring side slit. Pure elegance.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,400</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 6 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="jumpsuits" data-price="1300">
+                        <img src="https://placehold.co/600x800/3d2f0f/E6C88C?text=Orion+Suit" 
+                             alt="The Orion Suit" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/3d2f0f/E6C88C?text=Orion+Suit'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Orion Suit</h3>
+                            <p class="text-gray-300 mt-2">Wide-leg palazzo cut in shimmering gold fabric. A true statement.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,300</p>
+                        </div>
+                    </div>
+                    
+                    <!-- === NEW PRODUCTS START HERE === -->
+                    
+                    <!-- Product Card 7 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="799">
+                        <img src="https://placehold.co/600x800/2b210a/E6C88C?text=Athena+Mini" 
+                             alt="The Athena Mini" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/2b210a/E6C88C?text=Athena+Mini'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Athena Mini</h3>
+                            <p class="text-gray-300 mt-2">Cocktail dress with gold-chain detailing. Bold and modern.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$799</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 8 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="1650">
+                        <img src="https://placehold.co/600x800/201a05/E6C88C?text=Hera+Gown" 
+                             alt="The Hera Gown" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/201a05/E6C88C?text=Hera+Gown'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Hera Gown</h3>
+                            <p class="text-gray-300 mt-2">Embroidered lace with a mermaid silhouette. Unforgettable elegance.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,650</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 9 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="jumpsuits" data-price="1150">
+                        <img src="https://placehold.co/600x800/3c2f0f/E6C88C?text=Artemis+Suit" 
+                             alt="The Artemis Suit" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/3c2f0f/E6C88C?text=Artemis+Suit'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Artemis Suit</h3>
+                            <p class="text-gray-300 mt-2">Asymmetrical cut with a single sheer sleeve. High fashion.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,150</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 10 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="1050">
+                        <img src="https://placehold.co/600x800/2a1f0a/E6C88C?text=Venus+Slip" 
+                             alt="The Venus Slip" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/2a1f0a/E6C88C?text=Venus+Slip'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Venus Slip</h3>
+                            <p class="text-gray-300 mt-2">Pure silk slip dress in a champagne gold hue. Effortlessly chic.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,050</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 11 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="jumpsuits" data-price="920">
+                        <img src="https://placehold.co/600x800/1a1a0a/E6C88C?text=Leo+Jumpsuit" 
+                             alt="The Leo Jumpsuit" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/1a1a0a/E6C88C?text=Leo+Jumpsuit'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Leo Jumpsuit</h3>
+                            <p class="text-gray-300 mt-2">Sequined bodice with tailored black trousers. Power and poise.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$920</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 12 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="1800">
+                        <img src="https://placehold.co/600x800/3d2f0f/E6C88C?text=Persephone" 
+                             alt="The Persephone" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/3d2f0f/E6C88C?text=Persephone'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Persephone</h3>
+                            <p class="text-gray-300 mt-2">Black velvet gown with gold embroidery. Regal and dramatic.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,800</p>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 13 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="880">
+                        <img src="https://placehold.co/600x800/2b210a/E6C88C?text=Calypso+Wrap" 
+                             alt="The Calypso Wrap" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/2b210a/E6C88C?text=Calypso+Wrap'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Calypso Wrap</h3>
+                            <p class="text-gray-300 mt-2">Metallic-thread wrap dress. Perfect for beachside evenings.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$880</p>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 14 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="jumpsuits" data-price="1280">
+                        <img src="https://placehold.co/600x800/201a05/E6C88C?text=Andromeda" 
+                             alt="The Andromeda" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/201a05/E6C88C?text=Andromeda'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Andromeda</h3>
+                            <p class="text-gray-300 mt-2">White crepe jumpsuit with a detachable gold belt. Minimalist perfection.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,280</p>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 15 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="950">
+                        <img src="https://placehold.co/600x800/3c2f0f/E6C88C?text=Midas+Shift" 
+                             alt="The Midas Shift" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/3c2f0f/E6C88C?text=Midas+Shift'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Midas Shift</h3>
+                            <p class="text-gray-300 mt-2">Classic shift dress in full gold sequins. The ultimate party dress.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$950</p>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 16 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="jumpsuits" data-price="1080">
+                        <img src="https://placehold.co/600x800/2a1f0a/E6C88C?text=Electra+Suit" 
+                             alt="The Electra Suit" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/2a1f0a/E6C88C?text=Electra+Suit'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Electra Suit</h3>
+                            <p class="text-gray-300 mt-2">Deep V-neck with flared legs. 70s glamour redefined.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,080</p>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 17 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="1500">
+                        <img src="https://placehold.co/600x800/1a1a0a/E6C88C?text=Rhea+Gown" 
+                             alt="The Rhea Gown" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/1a1a0a/E6C88C?text=Rhea+Gown'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Rhea Gown</h3>
+                            <p class="text-gray-300 mt-2">One-shoulder cut in flowing georgette. Ethereal and light.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,500</p>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 18 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="1320">
+                        <img src="https://placehold.co/600x800/3d2f0f/E6C88C?text=Thalia+Dress" 
+                             alt="The Thalia Dress" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/3d2f0f/E6C88C?text=Thalia+Dress'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Thalia Dress</h3>
+                            <p class="text-gray-300 mt-2">Ruched bodycon in metallic knit. Accentuates every curve.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,320</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 19 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="jumpsuits" data-price="990">
+                        <img src="https://placehold.co/600x800/2b210a/E6C88C?text=Lyra+Suit" 
+                             alt="The Lyra Suit" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/2b210a/E6C88C?text=Lyra+Suit'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Lyra Suit</h3>
+                            <p class="text-gray-300 mt-2">Structured shoulders and a belted waist. Sharp and sophisticated.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$990</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 20 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="1700">
+                        <img src="https://placehold.co/600x800/201a05/E6C88C?text=Astraea+Gown" 
+                             alt="The Astraea Gown" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/201a05/E6C88C?text=Astraea+Gown'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Astraea Gown</h3>
+                            <p class="text-gray-300 mt-2">Draped satin with a cowl back. Hollywood glamour.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,700</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 21 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="1200">
+                        <img src="https://placehold.co/600x800/3c2f0f/E6C88C?text=Selene+Dress" 
+                             alt="The Selene Dress" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/3c2f0f/E6C88C?text=Selene+Dress'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Selene Dress</h3>
+                            <p class="text-gray-300 mt-2">Silver-gold blended fabric, pleated. Shines like moonlight.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,200</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 22 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="jumpsuits" data-price="1450">
+                        <img src="https://placehold.co/600x800/2a1f0a/E6C88C?text=Vega+Jumpsuit" 
+                             alt="The Vega Jumpsuit" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/2a1f0a/E6C88C?text=Vega+Jumpsuit'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Vega Jumpsuit</h3>
+                            <p class="text-gray-300 mt-2">Tailored shorts jumpsuit with a long overskirt. Versatile style.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,450</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 23 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="1120">
+                        <img src="https://placehold.co/600x800/1a1a0a/E6C88C?text=Iris+Dress" 
+                             alt="The Iris Dress" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/1a1a0a/E6C88C?text=Iris+Dress'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Iris Dress</h3>
+                            <p class="text-gray-300 mt-2">Sheer chiffon with iridescent sequins. A rainbow of gold.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,120</p>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 24 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="1000">
+                        <img src="https://placehold.co/600x800/3d2f0f/E6C88C?text=Juno+Dress" 
+                             alt="The Juno Dress" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/3d2f0f/E6C88C?text=Juno+Dress'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Juno Dress</h3>
+                            <p class="text-gray-300 mt-2">Strapless, structured A-line. Classic beauty in bonded crepe.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,000</p>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 25 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="jumpsuits" data-price="900">
+                        <img src="https://placehold.co/600x800/2b210a/E6C88C?text=Cygnus+Suit" 
+                             alt="The Cygnus Suit" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/2b210a/E6C88C?text=Cygnus+Suit'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Cygnus Suit</h3>
+                            <p class="text-gray-300 mt-2">Halter-neck with an open back. Sleek and captivating.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$900</p>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 26 -->
+                    <div class="product-card glass-ui rounded-3xl overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-gold/30 hover:shadow-2xl"
+                         data-category="dresses" data-price="1550">
+                        <img src="https://placehold.co/600x800/201a05/E6C88C?text=Vesta+Gown" 
+                             alt="The Vesta Gown" 
+                             class="w-full h-96 object-cover object-center"
+                             onerror="this.src='https://placehold.co/600x800/201a05/E6C88C?text=Vesta+Gown'">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gold">The Vesta Gown</h3>
+                            <p class="text-gray-300 mt-2">Column gown with a crystal-encrusted cape. Pure luxury.</p>
+                            <p class="text-xl font-semibold text-white mt-4">$1,550</p>
+                        </div>
+                    </div>
+                    
+                    <!-- === NEW PRODUCTS END HERE === -->
+                    
+                </div>
+            </section>
+        </main>
+        
+        <!-- === ABOUT PAGE === -->
+        <main id="page-about" class="page-content hidden">
+            <!-- About Section -->
+            <section class="glass-ui rounded-3xl my-24 md:my-32 p-10 md:p-16 flex flex-col md:flex-row items-center gap-10">
+                <div class="flex-1">
+                    <h2 class="text-4xl font-bold mb-6">
+                        Crafted for <span class="text-gradient-gold">Radiance</span>
+                    </h2>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-4">
+                        At Hibs Hive, we believe that true luxury lies in the details. Each dress is a testament to meticulous craftsmanship, using only the world's finest fabrics. Our design philosophy is simple: create pieces that feel as exquisite as they look.
+                    </p>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        From the first sketch to the final stitch, we pour passion into every garment, ensuring you don't just wear a dress—you experience it.
+                    </p>
+                </div>
+                <div class="flex-1 flex justify-center items-center p-8 glass-ui rounded-3xl" style="background: rgba(10,10,10,0.3);">
+                     <span class="text-7xl font-extrabold text-gradient-gold opacity-80">HIBS HIVE</span>
+                </div>
+            </section>
+        </main>
+        
+        <!-- === CONTACT PAGE === -->
+        <main id="page-contact" class="page-content hidden">
+            <section class="mt-24 md:mt-32">
+                <h2 class="text-4xl font-bold text-center mb-12">
+                    Get In <span class="text-gradient-gold">Touch</span>
+                </h2>
+                
+                <div class="glass-ui rounded-3xl max-w-2xl mx-auto p-8 md:p-12">
+                    <p class="text-lg text-gray-300 text-center mb-8">
+                        Have a question about a custom order or a general inquiry? We would love to hear from you.
+                    </p>
+                    <form action="#" method="POST">
+                        <div class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-300 mb-1 ml-2">Full Name</label>
+                                <input type="text" name="name" id="name" required
+                                       class="w-full bg-gray-900/50 border border-gold/30 text-white rounded-lg p-3 focus:ring-gold focus:border-gold"
+                                       placeholder="Your Name">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300 mb-1 ml-2">Email Address</label>
+                                <input type="email" name="email" id="email" required
+                                       class="w-full bg-gray-900/50 border border-gold/30 text-white rounded-lg p-3 focus:ring-gold focus:border-gold"
+                                       placeholder="you@example.com">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-300 mb-1 ml-2">Message</label>
+                                <textarea name="message" id="message" rows="6" required
+                                          class="w-full bg-gray-900/50 border border-gold/30 text-white rounded-lg p-3 focus:ring-gold focus:border-gold"
+                                          placeholder="Your message..."></textarea>
+                            </div>
+                            <div>
+                                <button type="submit"
+                                        class="w-full mt-4 px-10 py-4 rounded-full bg-gold text-deep-black text-lg font-bold
+                                               hover:bg-soft-gold transition-all duration-300 
+                                               transform hover:scale-105 shadow-lg shadow-gold/20">
+                                    Send Message
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="glass-ui rounded-t-3xl p-10 mt-16 text-center text-gray-400">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex justify-center flex-wrap space-x-8 mb-6">
+                    <a href="#" class="hover:text-gold transition-colors duration-300">Instagram</a>
+                    <a href="#" class="hover:text-gold transition-colors duration-300">Facebook</a>
+                    <a href="#" class="hover:text-gold transition-colors duration-300">Pinterest</a>
+                </div>
+                <div class="flex justify-center flex-wrap space-x-6 text-sm mb-6">
+                    <a href="#" class="hover:text-gold transition-colors duration-300">Shipping & Returns</a>
+                    <a href="#" class="hover:text-gold transition-colors duration-300">Privacy Policy</a>
+                    <a href="#" class="hover:text-gold transition-colors duration-300">Terms of Service</a>
+                </div>
+                <p>&copy; 2025 Hibs Hive. All Rights Reserved. Luxury Defined.</p>
+            </div>
+        </footer>
+        
+    </div>
+
+    <!-- JavaScript for Filtering and Sorting -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const categoryFilter = document.getElementById('category-filter');
+            const sortFilter = document.getElementById('sort-filter');
+            const productGrid = document.getElementById('product-grid');
+            
+            // Get all product cards as a static array to preserve original order
+            // Check if productGrid exists before querying, in case we are on a page without it.
+            const productCards = productGrid ? Array.from(productGrid.querySelectorAll('.product-card')) : [];
+
+            function applyFiltersAndSort() {
+                // Ensure elements exist before accessing their value
+                const selectedCategory = categoryFilter ? categoryFilter.value : 'all';
+                const selectedSort = sortFilter ? sortFilter.value : 'default';
+
+                // 1. Apply Filtering and get a list of visible cards
+                const visibleCards = productCards.filter(card => {
+                    const cardCategory = card.dataset.category;
+                    const matchesCategory = (selectedCategory === 'all' || cardCategory === selectedCategory);
+                    
+                    // Show/hide based on filter
+                    if (matchesCategory) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                    
+                    return matchesCategory;
+                });
+
+                // 2. Apply Sorting only to the visible cards
+                let sortedCards;
+
+                if (selectedSort === 'price-asc') {
+                    sortedCards = [...visibleCards].sort((a, b) => parseFloat(a.dataset.price) - parseFloat(b.dataset.price));
+                } else if (selectedSort === 'price-desc') {
+                    sortedCards = [...visibleCards].sort((a, b) => parseFloat(b.dataset.price) - parseFloat(a.dataset.price));
+                } else {
+                    // 'default' sort just uses the original DOM order
+                    // We already filtered `visibleCards` in the correct order from `productCards`
+                    sortedCards = visibleCards;
+                }
+
+                // 3. Re-append sorted cards to the grid
+                // Ensure productGrid exists before appending
+                if (productGrid) {
+                    sortedCards.forEach(card => {
+                        productGrid.appendChild(card);
+                    });
+                }
+            }
+
+            // Add event listeners to both dropdowns, but only if they exist
+            if (categoryFilter) {
+                categoryFilter.addEventListener('change', applyFiltersAndSort);
+            }
+            if (sortFilter) {
+                sortFilter.addEventListener('change', applyFiltersAndSort);
+            }
+
+            // --- Mobile Menu Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            const openMenu = () => {
+                if (mobileMenu) {
+                    mobileMenu.classList.remove('hidden');
+                }
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            };
+            
+            const closeMenu = () => {
+                if (mobileMenu) {
+                    mobileMenu.classList.add('hidden');
+                }
+                document.body.style.overflow = ''; // Allow scrolling again
+            };
+
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', openMenu);
+            }
+            if (mobileMenuCloseButton) {
+                mobileMenuCloseButton.addEventListener('click', closeMenu);
+            }
+            
+            // Close menu if a link is clicked
+            if (mobileMenu) {
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+            }
+
+            // --- Page Navigation Logic ---
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page-content');
+
+            function showPage(pageId) {
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.add('hidden');
+                });
+                
+                // Show the target page
+                const targetPage = document.getElementById('page-' + pageId);
+                if (targetPage) {
+                    targetPage.classList.remove('hidden');
+                } else {
+                    // Fallback to home if page not found
+                    const homePage = document.getElementById('page-home');
+                    if (homePage) {
+                        homePage.classList.remove('hidden');
+                    }
+                }
+                
+                // Scroll to top of the page
+                window.scrollTo(0, 0);
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault(); // Stop the link from trying to navigate
+                    const pageId = link.dataset.page;
+                    if (pageId) { // Ensure pageId is not null/undefined
+                        showPage(pageId);
+                    }
+                });
+            });
+
+            // Ensure home page is shown on load by default
+            // This is handled by default 'hidden' classes in the HTML, 
+            // but we'll call showPage('home') to be certain.
+            showPage('home');
+        });
+    </script>
+
+</body>
+</html>
